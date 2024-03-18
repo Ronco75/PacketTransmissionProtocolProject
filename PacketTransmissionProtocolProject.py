@@ -18,7 +18,6 @@ class Packet:
                                     self.__is_ack,
                                     self.__data)
 
-
     def get_source_address(self):
         return self.__source_address
 
@@ -40,28 +39,24 @@ class Packet:
 
 class Communicator:
     def __init__(self, address):
-        # TODO: FILL YOU CODE HERE
-        pass
+        self.__address = address
+        self.__num_seq_current = None
 
     def get_address(self):
-        # TODO: FILL YOU CODE HERE
-        pass
+        return self.__address
 
     def get_current_sequence_number(self):
-        # TODO: FILL YOU CODE HERE
-        pass
+        return self.__num_seq_current
 
     def set_current_sequence_number(self, seq_num):
-        # TODO: FILL YOU CODE HERE
-        pass
+        self.__num_seq_current = seq_num
 
     def send_packet(self, packet):
-        # TODO: FILL YOU CODE HERE
-        pass
+        print("Packet Seq Num: " + {packet.get_sequence_number()} + " was sent")
 
     def increment_current_seq_num(self):
-        # TODO: FILL YOU CODE HERE
-        pass
+        if Packet.get_is_ack():
+            self.__num_seq_current += 1
 
 
 class Sender(Communicator):
