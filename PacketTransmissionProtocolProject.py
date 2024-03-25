@@ -8,15 +8,15 @@ class Packet:
         self.__data = data
 
     def __repr__(self):
-        return ("Source Address: {self.__source_address}, \n"
+        return ("Packet(Source Address: {self.__source_address}, \n"
                 "Destination Address: {}, \n"
                 "Sequence Number: {}, \n"
                 "Is Ack: {}, \n"
-                "Data: {}.").format(self.__source_address,
-                                    self.__destination_address,
-                                    self.__sequence_number,
-                                    self.__is_ack,
-                                    self.__data)
+                "Data: {}.)").format(self.__source_address,
+                                     self.__destination_address,
+                                     self.__sequence_number,
+                                     self.__is_ack,
+                                     self.__data)
 
     def get_source_address(self):
         return self.__source_address
@@ -52,7 +52,7 @@ class Communicator:
         self.__num_seq_current = seq_num
 
     def send_packet(self, packet):
-        print("Packet Seq Num: " + {packet.get_sequence_number()} + " was sent")
+        print("Packet Seq Num: {} was sent".format(packet.get_sequence_number()))
 
     def increment_current_seq_num(self):
         if Packet.get_is_ack():
@@ -61,22 +61,23 @@ class Communicator:
 
 class Sender(Communicator):
     def __init__(self, address, num_letters_in_packet):
-        # TODO: FILL YOU CODE HERE
-        pass
+        super().__init__(address)
+        self.__num_letters_in_packet = num_letters_in_packet
 
     def prepare_packets(self, message, destination_address):
         # TODO: FILL YOU CODE HERE
         pass
 
     def receive_ack(self, acknowledgment_packet):
-        # TODO: FILL YOU CODE HERE
-        pass
+        return acknowledgment_packet.get_is_ack()
 
 
 class Receiver(Communicator):
     def __init__(self, address):
         # TODO: FILL YOU CODE HERE
-        pass
+        super().__init__(address)
+        self.__address = address
+        self.received_packets = []
 
     def receive_packet(self, packet):
         # TODO: FILL YOU CODE HERE
